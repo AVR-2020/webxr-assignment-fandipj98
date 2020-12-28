@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizShooter</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> 
+</head>
+    <body>
+        <a-scene environment="preset:forest; skycolor: #24b59f; groundTexture: walkernoise;">
+            
+            <!-- Cursor -->
+            <a-camera>
+                <a-entity
+                    cursor="
+                        fuse: true;
+                        fuseTimeout: 500;
+                    "
+                    geometry="
+                        primitive: ring; 
+                        radiusInner: 0.03; 
+                        radiusOuter: 0.05;
+                    "
+                    material="
+                        color: red;
+                        shader: flat;
+                    "
+                    position="0 0 -2"
+                ></a-entity>
+            </a-camera>
+
+            <!-- Question -->
+            <a-entity
+                geometry="
+                    primitive: box;
+                    width: 10;
+                    height: 5;
+                "
+                material="color: #aacc00"
+                position="0 5 -10"
+            >    
+                <a-entity
+                    text__downbtn="
+                        align: center;
+                        baseline: bottom;
+                        value: Question;
+                        zOffset: 0.6;
+                    "
+                    scale="10 10 1"
+                ></a-entity>
+            </a-entity>
+
+            <!-- Answer 1 -->
+            <a-entity
+                geometry="primitive: box;"
+                material="color: #55aaaa"
+                position="-4 1 -7"
+            >
+                <a-entity
+                    text__downbtn="
+                        align: center;
+                        baseline: bottom;
+                        value: Answer 1;
+                        zOffset: 0.6;
+                    "
+                    scale="5 5 1"
+                ></a-entity>
+            </a-entity>
+
+            <!-- Answer 2 -->
+            <a-entity
+                geometry="primitive: box;"
+                material="color: #55aaaa"
+                position="0 1 -7"
+            >
+                <a-entity
+                    text__downbtn="
+                        align: center;
+                        baseline: bottom;
+                        value: Answer 2;
+                        zOffset: 0.6;
+                    "
+                    scale="5 5 1"
+                ></a-entity>
+            </a-entity>
+            
+            <!-- Answer 3 -->
+            <a-entity
+                geometry="primitive: box;"
+                material="color: #55aaaa"
+                position="4 1 -7"
+            >
+                <a-entity
+                    text__downbtn="
+                        align: center;
+                        baseline: bottom;
+                        value: Answer 3;
+                        zOffset: 0.6;
+                    "
+                    scale="5 5 1"
+                ></a-entity>
+            </a-entity>
+
+        </a-scene>
+    </body>
+</html>
