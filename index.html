@@ -6,12 +6,20 @@
     <title>QuizShooter</title>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 </head>
     <body>
-        <a-scene environment="preset:forest; skycolor: #24b59f; groundTexture: walkernoise;">
+        <a-scene id="scene" physics="debug:true" environment="preset:forest; skycolor: #24b59f; ground: flat; groundTexture: walkernoise;">
             
+            <!-- Assets -->
+            <a-asset>
+                <a-asset-item id="whiteboard-obj" src="assets/whiteboard/whiteboard.obj"></a-asset-item>
+                <a-asset-item id="whiteboard-mtl" src="assets/whiteboard/whiteboard.mtl"></a-asset-item>
+            </a-asset>
+
             <!-- Cursor -->
-            <a-camera>
+            <a-camera id="camera">
                 <a-entity
                     cursor="
                         fuse: true;
@@ -30,35 +38,51 @@
                 ></a-entity>
             </a-camera>
 
+            <!-- Ground -->
+            <a-plane
+                id="ground"
+                static-body
+                position="0 -0.01 0"
+                rotation="-90 0 0"
+                scale="30 30 30"
+            ></a-plane>
+
             <!-- Question -->
             <a-entity
+                static-body
+                obj-model="
+                    obj: #whiteboard-obj;
+                    mtl: #whiteboard-mtl;
+                "
                 geometry="
                     primitive: box;
                     width: 10;
                     height: 5;
                 "
-                material="color: #aacc00"
-                position="0 5 -10"
+                position="0 2 -10"
+                scale="0.05 0.05 0.05"
             >    
                 <a-entity
-                    text__downbtn="
+                    text="
                         align: center;
                         baseline: bottom;
                         value: Question;
-                        zOffset: 0.6;
+                        color: black;
                     "
-                    scale="10 10 1"
+                    position="0 50 1"
+                    scale="200 200 1"
                 ></a-entity>
             </a-entity>
 
             <!-- Answer 1 -->
             <a-entity
+                static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="-4 1 -7"
             >
                 <a-entity
-                    text__downbtn="
+                    text="
                         align: center;
                         baseline: bottom;
                         value: Answer 1;
@@ -70,12 +94,13 @@
 
             <!-- Answer 2 -->
             <a-entity
+                static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="0 1 -7"
             >
                 <a-entity
-                    text__downbtn="
+                    text="
                         align: center;
                         baseline: bottom;
                         value: Answer 2;
@@ -87,12 +112,13 @@
             
             <!-- Answer 3 -->
             <a-entity
+                static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="4 1 -7"
             >
                 <a-entity
-                    text__downbtn="
+                    text="
                         align: center;
                         baseline: bottom;
                         value: Answer 3;
@@ -102,6 +128,9 @@
                 ></a-entity>
             </a-entity>
 
+            <a-box dynamic-body color="blue" scale="0.2 0.2 0.2" position="0 2 -3"></a-box>
+
         </a-scene>
     </body>
+    <script src="index.js"></script>
 </html>
