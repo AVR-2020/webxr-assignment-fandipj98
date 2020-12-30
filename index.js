@@ -1,15 +1,17 @@
 var myScene = document.getElementById('scene');
 var myCamera = document.getElementById('camera');
+var score = 0;
+var isCorrectAnswer = false;
 
 function getDirection(camera, speed) {
-    var y = camera.getAttribute('rotation').y + 90;
-    var x = camera.getAttribute('rotation').x;
+    let y = camera.getAttribute('rotation').y + 90;
+    let x = camera.getAttribute('rotation').x;
 
-    var moveX = Math.cos(y / 360 * (Math.PI * 2));
-    var moveY = Math.sin(x / 360 * (Math.PI * 2));
-    var moveZ = Math.sin(y / 360 * (Math.PI * 2));
-    var moveXRatio = (Math.pow(moveX, 2)) / (Math.pow(moveX, 2) + Math.pow(moveZ, 2));
-    var moveZRatio = (Math.pow(moveZ, 2)) / (Math.pow(moveX, 2) + Math.pow(moveZ, 2));
+    let moveX = Math.cos(y / 360 * (Math.PI * 2));
+    let moveY = Math.sin(x / 360 * (Math.PI * 2));
+    let moveZ = Math.sin(y / 360 * (Math.PI * 2));
+    let moveXRatio = (Math.pow(moveX, 2)) / (Math.pow(moveX, 2) + Math.pow(moveZ, 2));
+    let moveZRatio = (Math.pow(moveZ, 2)) / (Math.pow(moveX, 2) + Math.pow(moveZ, 2));
 
     if (moveX <= 0) {
         moveX = -Math.sqrt((1 - Math.pow(moveY, 2)) * moveXRatio);
@@ -27,13 +29,39 @@ function getDirection(camera, speed) {
 }
 
 const shoot = () => {
-    const bullet = document.createElement("a-sphere");
-    let pos = myCamera.getAttribute("position");
-    bullet.setAttribute("position", pos);
-    bullet.setAttribute("velocity", getDirection(myCamera, 10));
-    bullet.setAttribute("dynamic-body", "shape:sphere");
-    bullet.setAttribute("radius", 0.4);
-    myScene.appendChild(bullet);
+    console.log("shoot");
+    const ball = document.createElement("a-sphere");
+    let camPos = myCamera.getAttribute("position");
+    ball.setAttribute("position", camPos);
+    ball.setAttribute("velocity", getDirection(myCamera, 10));
+    ball.setAttribute("dynamic-body", "shape:sphere");
+    ball.setAttribute("radius", 0.4);
+    ball.setAttribute("color", "red");
+    myScene.appendChild(ball);
+    ball.addEventListener('collide', ballCollided);
+};
+
+const ballCollided = event => {
+    console.log("collide");
+    console.log(event.detail.body.el);
+    if (event.detail.body.el.id === 'answer1') {
+        console.log('Hit answer1');
+        score += 1;
+        event.detail.target.el.removeEventListener('collide', ballCollided);
+        myScene.removeChild(event.detail.target.el);
+    }
+    else if (event.detail.body.el.id === 'answer2') {
+        console.log('Hit answer2');
+        event.detail.target.el.removeEventListener('collide', ballCollided);
+        myScene.removeChild(event.detail.target.el);
+    }
+    else if (event.detail.body.el.id === 'answer3') {
+        console.log('Hit answer3');
+        event.detail.target.el.removeEventListener('collide', ballCollided);
+        myScene.removeChild(event.detail.target.el);
+    }
+    
+    console.log(score);
 };
   
 document.onkeydown = event => {

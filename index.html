@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizShooter</title>
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 </head>
     <body>
-        <a-scene id="scene" physics="debug:true" environment="preset:forest; skycolor: #24b59f; ground: flat; groundTexture: walkernoise;">
+        <a-scene id="scene" physics="debug:true" environment="preset:forest; skyColor: #24b59f; ground: flat; groundTexture: walkernoise;">
             
             <!-- Assets -->
             <a-asset>
@@ -49,6 +49,7 @@
 
             <!-- Question -->
             <a-entity
+                id="question"
                 static-body
                 obj-model="
                     obj: #whiteboard-obj;
@@ -76,10 +77,11 @@
 
             <!-- Answer 1 -->
             <a-entity
+                id="answer1"
                 static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
-                position="-4 1 -7"
+                position="-3 0.8 -7"
             >
                 <a-entity
                     text="
@@ -94,10 +96,11 @@
 
             <!-- Answer 2 -->
             <a-entity
+                id="answer2"
                 static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
-                position="0 1 -7"
+                position="0 0.8 -7"
             >
                 <a-entity
                     text="
@@ -112,10 +115,11 @@
             
             <!-- Answer 3 -->
             <a-entity
+                id="answer3"
                 static-body
                 geometry="primitive: box;"
                 material="color: #55aaaa"
-                position="4 1 -7"
+                position="3 0.8 -7"
             >
                 <a-entity
                     text="
@@ -127,8 +131,6 @@
                     scale="5 5 1"
                 ></a-entity>
             </a-entity>
-
-            <a-box dynamic-body color="blue" scale="0.2 0.2 0.2" position="0 2 -3"></a-box>
 
         </a-scene>
     </body>
