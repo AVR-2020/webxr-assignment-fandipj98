@@ -18,8 +18,10 @@
                 <a-asset-item id="whiteboard-mtl" src="assets/whiteboard/whiteboard.mtl"></a-asset-item>
             </a-asset>
 
-            <!-- Cursor -->
+            <!-- Camera -->
             <a-camera id="camera">
+                
+                <!-- Cursor -->
                 <a-entity
                     cursor="
                         fuse: true;
@@ -36,6 +38,37 @@
                     "
                     position="0 0 -2"
                 ></a-entity>
+
+                <!-- Score -->
+                <a-plane
+                    position="1.5 0.8 -1"
+                    scale="0.4 0.4 0.4"
+                    color="cyan"
+                >
+                    <a-text
+                        id="score"
+                        value="Score: 0"
+                        align="center"
+                        baseline="top"
+                    >
+                    </a-text>
+                </a-plane>
+
+                <!-- Timer -->
+                <a-plane
+                    position="0 0.8 -1"
+                    scale="0.4 0.4 0.4"
+                    color="cyan"
+                >
+                    <a-text
+                        id="timer"
+                        value="05:00"
+                        align="center"
+                        baseline="top"
+                    >
+                    </a-text>
+                </a-plane>
+
             </a-camera>
 
             <!-- Ground -->
@@ -49,7 +82,6 @@
 
             <!-- Question -->
             <a-entity
-                id="question"
                 static-body
                 obj-model="
                     obj: #whiteboard-obj;
@@ -63,73 +95,66 @@
                 position="0 2 -10"
                 scale="0.05 0.05 0.05"
             >    
-                <a-entity
-                    text="
-                        align: center;
-                        baseline: bottom;
-                        value: Question;
-                        color: black;
-                    "
+                <a-text
+                    id="question"
+                    align="center"
+                    baseline="bottom"
+                    value="Question"
+                    color="black"
                     position="0 50 1"
-                    scale="200 200 1"
-                ></a-entity>
+                    scale="50 50 1"
+                ></a-text>
             </a-entity>
 
             <!-- Answer 1 -->
             <a-entity
                 id="answer1"
-                static-body
+                static-body="shape:sphere"
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="-3 0.8 -7"
             >
-                <a-entity
-                    text="
-                        align: center;
-                        baseline: bottom;
-                        value: Answer 1;
-                        zOffset: 0.6;
-                    "
-                    scale="5 5 1"
-                ></a-entity>
+                <a-text
+                    id="answer1Text"
+                    align="center"
+                    baseline="bottom"
+                    value="Answer 1"
+                    position="0 0 0.5"
+                ></a-text>
             </a-entity>
 
             <!-- Answer 2 -->
             <a-entity
                 id="answer2"
-                static-body
+                static-body="shape:sphere"
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="0 0.8 -7"
             >
-                <a-entity
-                    text="
-                        align: center;
-                        baseline: bottom;
-                        value: Answer 2;
-                        zOffset: 0.6;
-                    "
-                    scale="5 5 1"
-                ></a-entity>
+                <a-text
+                    id="answer2Text"
+                    align="center"
+                    baseline="bottom"
+                    value="Answer 2"
+                    position="0 0 0.5"
+                ></a-text>
             </a-entity>
             
             <!-- Answer 3 -->
             <a-entity
                 id="answer3"
-                static-body
+                static-body="shape:sphere"
                 geometry="primitive: box;"
                 material="color: #55aaaa"
                 position="3 0.8 -7"
             >
-                <a-entity
-                    text="
-                        align: center;
-                        baseline: bottom;
-                        value: Answer 3;
-                        zOffset: 0.6;
-                    "
-                    scale="5 5 1"
-                ></a-entity>
+                <a-text
+                    id="answer3Text"
+                    align="center"
+                    baseline="bottom"
+                    value="Answer 3"
+                    position="0 0 0.5"
+                ></a-text>
             </a-entity>
 
         </a-scene>
