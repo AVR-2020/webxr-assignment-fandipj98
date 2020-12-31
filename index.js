@@ -44,6 +44,57 @@ var correctAnswer = [
 var questionNum = 0;
 var score = 0;
 
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        let time = minutes + ":" + seconds;
+        display.setAttribute("value", time);
+
+        if (--timer < 0) {
+            console.log("finish");
+            nextQuestion();
+            timer = duration;
+        }
+    }, 1000);
+}
+
+function nextQuestion(){
+    if (questionNum > 8){
+        gameOver();
+    }
+    else{
+        questionNum++;
+        questionObj.setAttribute("value", question[questionNum]);
+        answer1Obj.setAttribute("value", answer[questionNum][0]);
+        answer2Obj.setAttribute("value", answer[questionNum][1]);
+        answer3Obj.setAttribute("value", answer[questionNum][2]);
+    }
+}
+
+function gameOver(){
+    console.log("Game Over");
+    clearInterval();
+}
+
+function scoreIncrement() {
+    score++;
+    let scoreText = "Score: " + score;
+    scoreObj.setAttribute('value', scoreText);
+}
+
+function checkAnswer(answerNum) {
+    // If correct answer
+    if (answer[questionNum][answerNum-1] == correctAnswer[questionNum]){
+        scoreIncrement();
+    }
+}
+
 function getDirection(camera, speed) {
     let y = camera.getAttribute('rotation').y + 90;
     let x = camera.getAttribute('rotation').x;
@@ -67,38 +118,6 @@ function getDirection(camera, speed) {
     }
 
     return { x: moveX * speed, y: moveY * speed, z: -moveZ * speed };
-}
-
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        let time = minutes + ":" + seconds;
-        display.setAttribute("value", time);
-
-        if (--timer < 0) {
-            console.log("finish");
-            timer = duration;
-        }
-    }, 1000);
-}
-
-function scoreIncrement() {
-    score++;
-    let scoreText = "Score: " + score;
-    scoreObj.setAttribute('value', scoreText);
-}
-
-function checkAnswer(answerNum) {
-    // If correct answer
-    if (answer[questionNum][answerNum-1] == correctAnswer[questionNum]){
-        scoreIncrement();
-    }
 }
 
 const shoot = () => {
@@ -141,7 +160,7 @@ window.onload = function () {
     answer1Obj.setAttribute("value", answer[0][0]);
     answer2Obj.setAttribute("value", answer[0][1]);
     answer3Obj.setAttribute("value", answer[0][2]);
-    var gameTimer = 10;
+    var gameTimer = 5;
     var timerDisplay = document.getElementById('timer');
     startTimer(gameTimer, timerDisplay);
 };
