@@ -62,11 +62,23 @@ function startTimer(duration, display) {
         display.setAttribute("value", time);
 
         if (--timer < 0) {
-            console.log("finish");
-            nextQuestion();
+            revealAnswer();
+            setTimeout(nextQuestion, 1000);
             timer = duration;
         }
     }, 1000);
+}
+
+function revealAnswer(){
+    if (answer[questionNum][0] == correctAnswer[questionNum]){
+        answer1Obj.setAttribute("color", "green");
+    }
+    else if (answer[questionNum][1] == correctAnswer[questionNum]){
+        answer2Obj.setAttribute("color", "green");
+    }
+    else{
+        answer3Obj.setAttribute("color", "green");
+    }
 }
 
 function nextQuestion(){
@@ -82,6 +94,9 @@ function nextQuestion(){
         answer1Obj.setAttribute("value", answer[questionNum][0]);
         answer2Obj.setAttribute("value", answer[questionNum][1]);
         answer3Obj.setAttribute("value", answer[questionNum][2]);
+        answer1Obj.setAttribute("color", "white");
+        answer2Obj.setAttribute("color", "white");
+        answer3Obj.setAttribute("color", "white");
         startTimer(gameTimer, timerDisplay);
     }
 }
@@ -90,6 +105,12 @@ function gameOver(){
     console.log("Game Over");
     clearInterval(timerInterval);
     isFinished = true;
+    let gameOverText = document.createElement("a-text");
+    gameOverText.setAttribute("value", "Game Over");
+    gameOverText.setAttribute("position", "0 0.2 -1");
+    gameOverText.setAttribute("align", "center");
+    gameOverText.setAttribute("color", "black");
+    myCamera.appendChild(gameOverText);
 }
 
 function scoreIncrement() {
@@ -103,7 +124,8 @@ function checkAnswer(answerNum) {
     if (answer[questionNum][answerNum-1] == correctAnswer[questionNum]){
         scoreIncrement();
     }
-    nextQuestion();
+    revealAnswer();
+    setTimeout(nextQuestion, 1000);
 }
 
 function getDirection(camera, speed) {
@@ -118,13 +140,15 @@ function getDirection(camera, speed) {
 
     if (moveX <= 0) {
         moveX = -Math.sqrt((1 - Math.pow(moveY, 2)) * moveXRatio);
-    } else {
+    }
+    else {
         moveX = Math.sqrt((1 - Math.pow(moveY, 2)) * moveXRatio);
     }
 
     if (moveZ <= 0) {
         moveZ = -Math.sqrt((1 - Math.pow(moveY, 2)) * moveZRatio);
-    } else {
+    }
+    else {
         moveZ = Math.sqrt((1 - Math.pow(moveY, 2)) * moveZRatio);
     }
 
