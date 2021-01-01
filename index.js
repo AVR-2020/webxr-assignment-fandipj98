@@ -1,6 +1,7 @@
 var myScene = document.getElementById('scene');
 var myCamera = document.getElementById('camera');
 var questionObj = document.getElementById('question');
+var questionNumObj = document.getElementById('questionNum');
 var answer1Obj = document.getElementById('answer1Text');
 var answer2Obj = document.getElementById('answer2Text');
 var answer3Obj = document.getElementById('answer3Text');
@@ -43,10 +44,14 @@ var correctAnswer = [
 ];
 var questionNum = 0;
 var score = 0;
+var gameTimer = 5;
+var timerDisplay = document.getElementById('timer');
+var timerInterval;
+var isFinished = false;
 
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+    timerInterval = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -69,17 +74,22 @@ function nextQuestion(){
         gameOver();
     }
     else{
+        clearInterval(timerInterval);
         questionNum++;
+        let questionText = "Question " + (questionNum+1);
+        questionNumObj.setAttribute("value", questionText);
         questionObj.setAttribute("value", question[questionNum]);
         answer1Obj.setAttribute("value", answer[questionNum][0]);
         answer2Obj.setAttribute("value", answer[questionNum][1]);
         answer3Obj.setAttribute("value", answer[questionNum][2]);
+        startTimer(gameTimer, timerDisplay);
     }
 }
 
 function gameOver(){
     console.log("Game Over");
-    clearInterval();
+    clearInterval(timerInterval);
+    isFinished = true;
 }
 
 function scoreIncrement() {
@@ -93,6 +103,7 @@ function checkAnswer(answerNum) {
     if (answer[questionNum][answerNum-1] == correctAnswer[questionNum]){
         scoreIncrement();
     }
+    nextQuestion();
 }
 
 function getDirection(camera, speed) {
@@ -160,13 +171,13 @@ window.onload = function () {
     answer1Obj.setAttribute("value", answer[0][0]);
     answer2Obj.setAttribute("value", answer[0][1]);
     answer3Obj.setAttribute("value", answer[0][2]);
-    var gameTimer = 5;
-    var timerDisplay = document.getElementById('timer');
     startTimer(gameTimer, timerDisplay);
 };
 
 document.onkeydown = event => {
-    if (event.which == 32) {
-      shoot();
-    }
+    if (!isFinished){
+        if (event.which == 32) {
+            shoot();
+        }
+    }      
 };

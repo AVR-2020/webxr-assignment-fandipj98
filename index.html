@@ -14,8 +14,9 @@
             
             <!-- Assets -->
             <a-asset>
-                <a-asset-item id="whiteboard-obj" src="assets/whiteboard/whiteboard.obj"></a-asset-item>
-                <a-asset-item id="whiteboard-mtl" src="assets/whiteboard/whiteboard.mtl"></a-asset-item>
+                <a-asset-item id="whiteboardObj" src="assets/whiteboard/whiteboard.obj"></a-asset-item>
+                <a-asset-item id="whiteboardMtl" src="assets/whiteboard/whiteboard.mtl"></a-asset-item>
+                <a-asset-item id="boxGltf" src="assets/box/crate.glb"></a-asset-item>
             </a-asset>
 
             <!-- Camera -->
@@ -84,8 +85,8 @@
             <a-entity
                 static-body
                 obj-model="
-                    obj: #whiteboard-obj;
-                    mtl: #whiteboard-mtl;
+                    obj: #whiteboardObj;
+                    mtl: #whiteboardMtl;
                 "
                 geometry="
                     primitive: box;
@@ -94,7 +95,16 @@
                 "
                 position="0 2 -10"
                 scale="0.05 0.05 0.05"
-            >    
+            >
+                <a-text
+                    id="questionNum"
+                    align="center"
+                    baseline="bottom"
+                    value="Question 1"
+                    color="black"
+                    position="0 70 1"
+                    scale="35 35 1"
+                ></a-text>    
                 <a-text
                     id="question"
                     align="center"
@@ -111,15 +121,17 @@
                 id="answer1"
                 static-body="shape:sphere"
                 geometry="primitive: box;"
-                material="color: #55aaaa"
                 position="-3 0.8 -7"
+                gltf-model="#boxGltf"
+                scale="0.5 0.5 0.5"
             >
                 <a-text
                     id="answer1Text"
                     align="center"
                     baseline="bottom"
                     value="Answer 1"
-                    position="0 0 0.5"
+                    position="0 0 1"
+                    scale="2 2 2"
                 ></a-text>
             </a-entity>
 
@@ -128,15 +140,17 @@
                 id="answer2"
                 static-body="shape:sphere"
                 geometry="primitive: box;"
-                material="color: #55aaaa"
                 position="0 0.8 -7"
+                gltf-model="#boxGltf"
+                scale="0.5 0.5 0.5"
             >
                 <a-text
                     id="answer2Text"
                     align="center"
                     baseline="bottom"
                     value="Answer 2"
-                    position="0 0 0.5"
+                    position="0 0 1"
+                    scale="2 2 2"
                 ></a-text>
             </a-entity>
             
@@ -145,15 +159,17 @@
                 id="answer3"
                 static-body="shape:sphere"
                 geometry="primitive: box;"
-                material="color: #55aaaa"
                 position="3 0.8 -7"
+                gltf-model="#boxGltf"
+                scale="0.5 0.5 0.5"
             >
                 <a-text
                     id="answer3Text"
                     align="center"
                     baseline="bottom"
                     value="Answer 3"
-                    position="0 0 0.5"
+                    position="0 0 1"
+                    scale="2 2 2"
                 ></a-text>
             </a-entity>
 
