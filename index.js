@@ -44,7 +44,7 @@ var correctAnswer = [
 ];
 var questionNum = 0;
 var score = 0;
-var gameTimer = 5;
+var gameTimer = 10;
 var timerDisplay = document.getElementById('timer');
 var timerInterval;
 var isFinished = false;
@@ -161,8 +161,8 @@ const shoot = () => {
     ball.setAttribute("position", camPos);
     ball.setAttribute("velocity", getDirection(myCamera, 10));
     ball.setAttribute("dynamic-body", "shape:sphere");
-    ball.setAttribute("radius", 0.4);
-    ball.setAttribute("color", "red");
+    ball.setAttribute("material", "src:#ballMtl");
+    ball.setAttribute("radius", 0.5);
     myScene.appendChild(ball);
     ball.addEventListener('collide', ballCollided);
 };
@@ -199,9 +199,7 @@ window.onload = function () {
 };
 
 document.onkeydown = event => {
-    if (!isFinished){
-        if (event.which == 32) {
-            shoot();
-        }
-    }      
+    if (event.which == 32 && !isFinished) {
+        shoot();
+    }
 };
