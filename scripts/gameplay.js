@@ -10,42 +10,6 @@ var answer2Obj = document.getElementById('answer2Text');
 var answer3Obj = document.getElementById('answer3Text');
 var timerDisplay = document.getElementById('timer');
 var scoreObj = document.getElementById('score');
-var question = [
-    "2 + (-3) = …",
-    "-5 + (-2) = …",
-    "-7 + 3 + (-1) = …",
-    "3 x 4 = ...",
-    "32 : 8 = ...",
-    "2 x 5 - 6 : 2 = …",
-    "1, 3, 6, 10, 15, 21, …",
-    "4.096, 2.048, 1.024, 512, 256, …",
-    "50, 40, 31, 23, 16, …",
-    "Berapa persenkah 280 dari 700?"
-];
-var answer = [
-    ["1", "2", "-1"],
-    ["-6", "-7", "-3"],
-    ["4", "5", "-5"],
-    ["10", "12", "14"],
-    ["4", "6", "8"],
-    ["2", "-1", "7"],
-    ["26", "28", "32"],
-    ["128", "132", "143"],
-    ["12", "10", "8"],
-    ["35%", "37%", "40%"]
-];
-var correctAnswer = [
-    "-1",
-    "-7",
-    "-5",
-    "12",
-    "4",
-    "7",
-    "28",
-    "128",
-    "10",
-    "40%"
-];
 var questionNum = 0;
 var score = 0;
 var gameTimer = 10;
