@@ -18,6 +18,7 @@ var isFinished = false;
 var ballAudio = new Audio("audios/BallThrow.wav");
 var bgm = new Audio("audios/music_box_midori_orgel_styx_helix_re_zero.mp3");
 var gameOverText;
+var replyText;
 
 function initGame() {
     startObj.addEventListener("click", function() {
@@ -98,6 +99,17 @@ function gameOver(){
     myCamera.appendChild(gameOverText);
     bgm.pause();
     bgm.currentTime=0;
+    replyText = document.createElement("a-entity");
+    replyText.setAttribute("text", "value:Ulang; align:center; width:9");
+    replyText.setAttribute("position", "0 1.8 -7");
+    replyText.setAttribute("geometry", "primitive:plane; width:1.3; height:0.8");
+    replyText.setAttribute("material", "color: #088");
+    replyText.setAttribute("look-at", "#camera");
+    replyText.addEventListener("click", function() {
+        myScene.removeChild(replyText);
+        startGame();
+    });
+    myScene.appendChild(replyText);
 }
 
 function scoreIncrement() {
@@ -115,8 +127,5 @@ document.onkeydown = event => {
         canShoot = false;
         setTimeout( function() { canShoot = true; }, 1000);
         shoot();
-    }
-    else if (event.which == 82 && isFinished) {
-        startGame();
     }
 };

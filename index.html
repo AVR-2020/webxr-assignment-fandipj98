@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
@@ -174,12 +175,14 @@
                 ></a-text>
             </a-entity>
 
+            <!-- Title Game -->
             <a-plane
                 id="title"
-                position="0 2.3 -1.5"
+                position="0 2.4 -1.5"
                 color="#fff"
                 width="2.5"
-                height="0.5"
+                height="0.4"
+                look-at="#camera"
             >
                 <a-text
                     value="QuizShooter"
@@ -188,20 +191,22 @@
                 </a-text>
             </a-plane>
 
+            <!-- Instruction -->
             <a-plane
                 id="instruction"
                 position="0 1.8 -1.5"
                 color="#fff"
                 width="2.5"
                 height="0.5"
+                look-at="#camera"
             >
                 <a-text
                     value="
                         Tekan WASD Untuk Bergerak
                         Tahan Mouse Kiri Untuk Mengarahkan Tembakan
                         Tekan SPACE Untuk Menembak
-                        Tekan R Untuk Bermain Lagi
-
+                        
+                        Arahkan Kursor Ke Tombol Ulang Untuk Main Lagi
                         Arahkan Kursor Ke Tombol Mulai Untuk Bermain
                     "
                     align="center"
@@ -210,12 +215,14 @@
                 </a-text>
             </a-plane>
 
+            <!-- Start Button -->
             <a-plane
                 id="start"
                 position="0 1.3 -1.5"
-                color="#fff"
+                color="#088"
                 width="0.6"
                 height="0.3"
+                look-at="#camera"
             >
                 <a-text
                     value="Mulai"
